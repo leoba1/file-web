@@ -34,20 +34,6 @@
 						show-password
 					></el-input>
 				</el-form-item>
-				<!-- 页面宽度大于 768 像素时，直接在表单项内显示滑动解锁 -->
-				<el-form-item style="user-select: none" v-if="screenWidth > 768">
-					<drag-verify
-						ref="dragVerifyRef"
-						text="请按住滑块拖动解锁"
-						successText="验证通过"
-						handlerIcon="el-icon-d-arrow-right"
-						successIcon="el-icon-circle-check"
-						handlerBg="#F5F7FA"
-						:width="375"
-						:isPassing.sync="isPassing"
-						@update:isPassing="updateIsPassing"
-					></drag-verify>
-				</el-form-item>
 				<el-form-item class="registerButtonWrapper">
 					<el-button
 						class="registerButton"
@@ -60,45 +46,15 @@
 				</el-form-item>
 			</el-form>
 		</div>
-		<!-- 页面宽度小于等于 768 像素时，在遮罩层内显示滑动解锁，以防止移动端浏览器自带的左滑返回上一页手势 -->
-		<div
-			class="drag-verify-modal"
-			v-show="isShowDragVerify"
-			v-if="screenWidth <= 768"
-			@click.self="isShowDragVerify = false"
-		>
-			<drag-verify
-				ref="dragVerifyRef"
-				text="请按住滑块拖动解锁"
-				successText="验证通过"
-				handlerIcon="el-icon-d-arrow-right"
-				successIcon="el-icon-circle-check"
-				handlerBg="#F5F7FA"
-				:width="300"
-				:isPassing.sync="isPassing"
-				@update:isPassing="updateIsPassing"
-			></drag-verify>
-		</div>
 	</div>
 </template>
 
 <script>
-import CanvasNest from 'canvas-nest.js'
-import DragVerify from '_c/common/DragVerify.vue' //  引入滑动解锁组件
 import { addUser } from '_r/user.js'
-
-// 配置
-const config = {
-	color: '230, 162, 60', // 线条颜色
-	pointColor: '230, 162, 60', // 节点颜色
-	opacity: 0.5, // 线条透明度
-	count: 99, // 线条数量
-	zIndex: -1 // 画面层级
-}
 
 export default {
 	name: 'Register',
-	components: { DragVerify },
+	// components: { DragVerify },
 	data() {
 		return {
 			// 注册表单
@@ -126,9 +82,6 @@ export default {
 					{ min: 11, max: 11, message: '请输入11位手机号', trigger: 'blur' }
 				]
 			},
-			isShowDragVerify: false, //  页面宽度小于 768px 时，滑动解锁是否显示
-			isPassing: false, //  滑动解锁是否验证通过
-			registerBtnDisabled: true, //  注册按钮是否禁用
 			registerBtnLoading: false //  注册按钮是否 loading 状态
 		}
 	},
@@ -138,23 +91,8 @@ export default {
 			return this.$store.state.common.screenWidth
 		}
 	},
-	watch: {
-		//  滑动解锁验证通过时，若重新输入手机号、用户名或密码，滑动解锁恢复原样
-		'registerForm.telephone'() {
-			this.resetVerifyPassing()
-		},
-		'registerForm.username'() {
-			this.resetVerifyPassing()
-		},
-		'registerForm.password'() {
-			this.resetVerifyPassing()
-		}
-	},
 	created() {
-		//  绘制背景图
 		this.$nextTick(() => {
-			let element = document.getElementById('registerBackground')
-			new CanvasNest(element, config)
 		})
 	},
 	mounted() {
@@ -163,17 +101,6 @@ export default {
 		}
 	},
 	methods: {
-		/**
-		 * 重置滑动解锁至未解锁状态
-		 * 注册按钮禁用
-		 */
-		resetVerifyPassing() {
-			this.isPassing = false
-			this.$refs.dragVerifyRef.reset()
-			if (this.screenWidth > 768) {
-				this.registerBtnDisabled = true
-			}
-		},
 		/**
 		 * 滑动解锁完成 回调函数
 		 * @param {boolean} isPassing 解锁是否通过
@@ -231,9 +158,6 @@ export default {
 			addUser(this.registerForm)
 				.then((res) => {
 					this.registerBtnLoading = false
-					if (this.screenWidth <= 768) {
-						this.isShowDragVerify = false
-					}
 					if (res.success) {
 						this.$notify({
 							title: '成功',
@@ -248,9 +172,6 @@ export default {
 				})
 				.catch(() => {
 					this.registerBtnLoading = false
-					if (this.screenWidth <= 768) {
-						this.isShowDragVerify = false
-					}
 				})
 		}
 	}

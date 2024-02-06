@@ -2,20 +2,18 @@
 	<div id="app">
 		<Header v-if="isHeaderShow" id="headWrapper"></Header>
 		<router-view class="main-content"></router-view>
-		<Footer v-if="isFooterShow"></Footer>
 		<el-backtop class="backtop" target="#app" title="回到顶部"></el-backtop>
 	</div>
 </template>
 
 <script>
 import Header from '_c/Header.vue'
-import Footer from '_c/Footer.vue'
 
 export default {
 	name: 'App',
 	components: {
 		Header,
-		Footer
+		// Footer
 	},
 	computed: {
 		//  头部是否显示
@@ -48,9 +46,9 @@ export default {
 			.setAttribute(
 				'content',
 				process.env.NODE_ENV === 'production' &&
-					location.host.indexOf('.qiwenshare.com') !== -1
+					location.host.indexOf('.he.com') !== -1
 					? this.$config.siteName
-					: '网盘名称'
+					: '文件中转系统'
 			)
 	}
 }

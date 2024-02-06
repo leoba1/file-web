@@ -8,8 +8,8 @@ const config = {
 	 */
 	domain:
 		process.env.NODE_ENV === 'production'
-			? location.host.indexOf('.qiwenshare.com') !== -1
-				? '.qiwenshare.com'
+			? location.host.indexOf('.helloWorld.com') !== -1
+				? '.helloWorld.com'
 				: ''
 			: location.hostname,
 	/**
@@ -17,9 +17,9 @@ const config = {
 	 */
 	siteName:
 		process.env.NODE_ENV === 'production' &&
-		location.host.indexOf('.qiwenshare.com') !== -1
-			? '奇文网盘'
-			: '网盘名称',
+		location.host.indexOf('.helloWorld.com') !== -1
+			? '123'
+			: '文件中转系统',
 	/**
 	 * 请求后台接口 URL 代理时的上下文
 	 * @description 仅适用于本地开发环境代理时使用，

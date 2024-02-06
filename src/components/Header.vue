@@ -12,10 +12,10 @@
 			mode="horizontal"
 			@select="menuItemClick"
 		>
-			<el-menu-item index="Home">首页</el-menu-item>
-			<el-menu-item index="File">网盘</el-menu-item>
+			<el-menu-item index="Home">传输</el-menu-item>
+			<el-menu-item index="File">存储</el-menu-item>
 			<li class="el-menu-item external-link">
-        <a href="https://pan.qiwenshare.com/docs/" target="_blank">文档</a>
+        <a href="https://pan.qiwenshare.com/docs/" target="_blank">临时文档</a>
 			</li>
 			<template v-if="isLogin">
 				<el-submenu
