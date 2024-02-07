@@ -31,7 +31,6 @@
 					<el-button
 						class="login-btn"
 						type="primary"
-						:disabled="loginBtnDisabled"
 						:loading="loginBtnLoading"
 						@click="submitForm('loginForm')"
 						>登录</el-button
@@ -101,9 +100,6 @@ export default {
 		})
 	},
 	mounted() {
-		if (this.screenWidth <= 768) {
-			this.loginBtnDisabled = false
-		}
 	},
 	methods: {
 		/**
@@ -112,13 +108,13 @@ export default {
 		 */
 		updateIsPassing(isPassing) {
 			if (isPassing) {
-				if (this.screenWidth > 768) {
+				if (this.screenWidth > 168) {
 					this.loginBtnDisabled = false
 				} else {
 					this.handleUserLogin('loginForm')
 				}
 			} else {
-				if (this.screenWidth > 768) {
+				if (this.screenWidth > 168) {
 					this.loginBtnDisabled = true
 				}
 			}
@@ -132,7 +128,7 @@ export default {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
 					// 表单各项校验通过
-					if (this.screenWidth > 768) {
+					if (this.screenWidth > 168) {
 						this.handleUserLogin(formName)
 					} else {
 						this.isShowDragVerify = true
@@ -152,7 +148,7 @@ export default {
 			login(this.loginForm, true)
 				.then((res) => {
 					this.loginBtnLoading = false
-					if (this.screenWidth <= 768) {
+					if (this.screenWidth <= 168) {
 						this.isShowDragVerify = false
 					}
 					if (res.success) {
@@ -168,7 +164,7 @@ export default {
 				})
 				.catch(() => {
 					this.loginBtnLoading = false
-					if (this.screenWidth <= 768) {
+					if (this.screenWidth <= 168) {
 						this.isShowDragVerify = false
 					}
 				})

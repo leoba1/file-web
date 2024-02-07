@@ -14,7 +14,7 @@
 					type="primary"
 					icon="el-icon-upload2"
 					id="uploadFileId"
-					>上传<i class="el-icon-arrow-down el-icon--right"></i
+					>上传文件<i class="el-icon-arrow-down el-icon--right"></i
 				></el-button>
 				<el-dropdown-menu slot="dropdown">
 					<el-dropdown-item @click.native="handleUploadFileBtnClick(1)"
@@ -34,30 +34,14 @@
 
 			<el-dropdown class="create-drop" trigger="hover">
 				<el-button
+            @click.native="handleClickAddFolderBtn"
 					size="mini"
 					type="primary"
 					icon="el-icon-plus"
 					id="uploadFileId"
-					>新建<i class="el-icon-arrow-down el-icon--right"></i
+					>新建文件夹<i class="el-icon--right"></i
 				></el-button>
-				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item @click.native="handleClickAddFolderBtn">
-						<div class="img-text-wrapper"><img :src="dirImg" /> 新建文件夹</div>
-					</el-dropdown-item>
-					<el-dropdown-item divided @click.native="handleCreateFile('docx')">
-						<div class="img-text-wrapper"><img :src="wordImg" />Word 文档</div>
-					</el-dropdown-item>
-					<el-dropdown-item @click.native="handleCreateFile('xlsx')">
-						<div class="img-text-wrapper">
-							<img :src="excelImg" />Excel 工作表
-						</div>
-					</el-dropdown-item>
-					<el-dropdown-item @click.native="handleCreateFile('pptx')">
-						<div class="img-text-wrapper">
-							<img :src="pptImg" />PPT 演示文稿
-						</div>
-					</el-dropdown-item>
-				</el-dropdown-menu>
+
 			</el-dropdown>
 		</el-button-group>
 		<div class="batch-operate-group">
@@ -337,17 +321,17 @@ export default {
 		 * @description 调用新建 office 文件服务，并在弹窗确认回调事件中刷新文件列表
 		 * @param {string} 文件扩展名 docx xlsx pptx
 		 */
-		handleCreateFile(extendName) {
-			this.$openDialog
-				.addFile({
-					extendName: extendName
-				})
-				.then((res) => {
-					if (res === 'confirm') {
-						this.$emit('getTableDataByType')
-					}
-				})
-		},
+		// handleCreateFile(extendName) {
+		// 	this.$openDialog
+		// 		.addFile({
+		// 			extendName: extendName
+		// 		})
+		// 		.then((res) => {
+		// 			if (res === 'confirm') {
+		// 				this.$emit('getTableDataByType')
+		// 			}
+		// 		})
+		// },
 		/**
 		 * 上传文件按钮点击事件
 		 * @description 通过Bus通信，开启全局上传文件流程
