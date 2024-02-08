@@ -13,10 +13,10 @@ export default new Router({
 			component: () => import(/* webpackChunkName: "home" */ '_v/Home.vue'),
 			meta: {
 				title:
-					'开源网盘 | 多种存储方式 | 在线预览编辑 | 分片、断点续传 | 文件分享',
+					'文件中转系统',
 				content: {
 					description:
-						'基于 Spring Boot + Vue CLI@3(Vue 2.0) 框架开发的 Web 文件系统，旨在为用户提供一个简单、方便的文件存储方案'
+						'文件中转系统'
 				}
 			}
 		},
@@ -39,7 +39,7 @@ export default new Router({
 			component: () => import(/* webpackChunkName: "file" */ '_v/File.vue'),
 			meta: {
 				requireAuth: true, //  当前路由是否需要登录才可进入
-				title: '网盘',
+				title: '存储',
 				content: {
 					description: '图片 文档 视频 音乐 其他 回收站 我的分享'
 				}

@@ -54,9 +54,9 @@ import { addUser } from '_r/user.js'
 
 export default {
 	name: 'Register',
-	// components: { DragVerify },
 	data() {
 		return {
+      registerBtnDisabled:null,
 			// 注册表单
 			registerForm: {
 				telephone: '',
@@ -83,6 +83,7 @@ export default {
 				]
 			},
 			registerBtnLoading: false //  注册按钮是否 loading 状态
+
 		}
 	},
 	computed: {
@@ -96,9 +97,6 @@ export default {
 		})
 	},
 	mounted() {
-		if (this.screenWidth <= 768) {
-			this.registerBtnDisabled = false
-		}
 	},
 	methods: {
 		/**
@@ -111,12 +109,12 @@ export default {
 				this.$refs.registerForm.validateField('telephone', (telephoneError) => {
 					if (telephoneError) {
 						// 校验未通过
-						if (this.screenWidth > 768) {
+						if (this.screenWidth > 68) {
 							this.registerBtnDisabled = true
 						}
 					} else {
 						// 校验通过
-						if (this.screenWidth <= 768) {
+						if (this.screenWidth <= 68) {
 							this.handleUserRegister('registerForm')
 						} else {
 							this.registerBtnDisabled = false
@@ -124,7 +122,7 @@ export default {
 					}
 				})
 			} else {
-				if (this.screenWidth > 768) {
+				if (this.screenWidth > 68) {
 					this.registerBtnDisabled = true
 				}
 			}
@@ -138,10 +136,9 @@ export default {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
 					// 表单各项校验通过
-					if (this.screenWidth > 768) {
+					if (this.screenWidth > 68) {
 						this.handleUserRegister(formName)
 					} else {
-						this.isShowDragVerify = true
 						this.registerBtnLoading = false
 					}
 				} else {
