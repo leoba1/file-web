@@ -485,20 +485,6 @@ export default {
 				})
 		},
 		/**
-		 * 新建 office 文件
-		 * @description 调用新建 office 文件服务，并在弹窗确认回调事件中刷新文件列表
-		 * @param {string} 文件扩展名 docx xlsx pptx
-		 */
-		handleCreateFile(extendName) {
-			this.$openDialog
-				.addFile({
-					extendName: extendName
-				})
-				.then((res) => {
-					this.callback(res)
-				})
-		},
-		/**
 		 * 上传文件按钮点击事件
 		 * @description 通过Bus通信，开启全局上传文件流程
 		 * @param {boolean} uploadWay 上传方式 0-文件上传 1-文件夹上传 2-粘贴图片或拖拽上传

@@ -83,26 +83,26 @@
 			</el-button-group>
 		</div>
 
-		<!-- 全局搜索文件 -->
-		<el-input
-			v-if="fileType === 0"
-			class="select-file-input"
-			v-model="searchFile.fileName"
-			placeholder="搜索您的文件"
-			size="mini"
-			maxlength="255"
-			:clearable="true"
-			@change="handleSearchInputChange"
-			@clear="$emit('getTableDataByType')"
-			@keyup.enter.native="handleSearchInputChange(searchFile.fileName)"
-		>
-			<i
-				slot="prefix"
-				class="el-input__icon el-icon-search"
-				title="点击搜索"
-				@click="handleSearchInputChange(searchFile.fileName)"
-			></i>
-		</el-input>
+<!--		&lt;!&ndash; 全局搜索文件 &ndash;&gt;-->
+<!--		<el-input-->
+<!--			v-if="fileType === 0"-->
+<!--			class="select-file-input"-->
+<!--			v-model="searchFile.fileName"-->
+<!--			placeholder="搜索您的文件"-->
+<!--			size="mini"-->
+<!--			maxlength="255"-->
+<!--			:clearable="true"-->
+<!--			@change="handleSearchInputChange"-->
+<!--			@clear="$emit('getTableDataByType')"-->
+<!--			@keyup.enter.native="handleSearchInputChange(searchFile.fileName)"-->
+<!--		>-->
+<!--			<i-->
+<!--				slot="prefix"-->
+<!--				class="el-input__icon el-icon-search"-->
+<!--				title="点击搜索"-->
+<!--				@click="handleSearchInputChange(searchFile.fileName)"-->
+<!--			></i>-->
+<!--		</el-input>-->
 
 		<!-- 批量操作 -->
 		<i
@@ -317,44 +317,17 @@ export default {
 				})
 		},
 		/**
-		 * 新建 office 文件
-		 * @description 调用新建 office 文件服务，并在弹窗确认回调事件中刷新文件列表
-		 * @param {string} 文件扩展名 docx xlsx pptx
-		 */
-		// handleCreateFile(extendName) {
-		// 	this.$openDialog
-		// 		.addFile({
-		// 			extendName: extendName
-		// 		})
-		// 		.then((res) => {
-		// 			if (res === 'confirm') {
-		// 				this.$emit('getTableDataByType')
-		// 			}
-		// 		})
-		// },
-		/**
 		 * 上传文件按钮点击事件
 		 * @description 通过Bus通信，开启全局上传文件流程
 		 * @param {boolean} uploadWay 上传方式 0-文件上传 1-文件夹上传 2-粘贴图片或拖拽上传
 		 */
 		handleUploadFileBtnClick(uploadWay) {
-			this.$openDialog.authWeChat({}).then((res) => {
-				switch (res) {
-					case 'confirm': {
-						this.$common.goAccount('/settings/account')
-						break
-					}
-					case 'go': {
-						this.$openBox.uploadFile({
-							params: this.uploadFileParams,
-							uploadWay,
-							serviceEl: this,
-							callType: 1 //  callType 调用此服务的方式：1 - 顶部栏，2 - 右键菜单
-						})
-						break
-					}
-				}
-			})
+      this.$openBox.uploadFile({
+        params: this.uploadFileParams,
+        uploadWay,
+        serviceEl: this,
+        callType: 1
+      })
 		},
 
 		/**
