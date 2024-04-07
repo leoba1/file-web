@@ -58,35 +58,13 @@
 					<i class="el-icon-download"></i> 下载
 				</a>
 			</li>
-			<!-- 0-解压到当前文件夹， 1-自动创建该文件名目录，并解压到目录里， 3-手动选择解压目录 -->
-			<li class="right-menu-item unzip-menu-item" v-if="unzipBtnShow">
-				<i class="el-icon-files"></i> 解压缩
-				<i class="el-icon-arrow-right"></i>
-				<ul
-					class="unzip-list"
-					:style="`top: ${unzipMenu.top};bottom: ${unzipMenu.bottom};left: ${unzipMenu.left};right: ${unzipMenu.right};`"
-				>
-					<li
-						class="unzip-item"
-						@click="handleUnzipFileBtnClick(selectedFile, 0)"
-					>
-						<i class="el-icon-files"></i> 解压到当前文件夹
-					</li>
-					<li
-						class="unzip-item"
-						@click="handleUnzipFileBtnClick(selectedFile, 1)"
-						:title="`解压到&quot;${selectedFile.fileName}&quot;`"
-					>
-						<i class="el-icon-files"></i> 解压到"{{ selectedFile.fileName }}"
-					</li>
-					<li
-						class="unzip-item"
-						@click="handleUnzipFileBtnClick(selectedFile, 2)"
-					>
-						<i class="el-icon-files"></i> 解压到目标文件夹
-					</li>
-				</ul>
-			</li>
+      <li
+          v-if="unzipBtnShow"
+          class="unzip-item"
+          @click="handleUnzipFileBtnClick(selectedFile, 0)"
+      >
+        <i class="el-icon-files"></i> 解压到当前文件夹
+      </li>
 			<li
 				class="right-menu-item"
 				@click="

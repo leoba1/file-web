@@ -46,18 +46,6 @@ export default new Router({
 			}
 		},
 		{
-			path: '/onlyoffice',
-			name: 'Onlyoffice',
-			meta: {
-				title: '在线编辑预览',
-				content: {
-					description: 'onlyoffice 文档在线编辑预览，支持 Word Excel PowerPoint'
-				}
-			},
-			component: () =>
-				import(/* webpackChunkName: "onlyOffice" */ '_v/OnlyOffice.vue')
-		},
-		{
 			path: '/share/:shareBatchNum',
 			name: 'Share',
 			component: () => import(/* webpackChunkName: "share" */ '_v/Share.vue'),
