@@ -32,20 +32,6 @@
 			</li>
 			<li
 				class="right-menu-item"
-				@click="handleCopyFileBtnClick(selectedFile)"
-				v-if="copyBtnShow"
-			>
-				<i class="el-icon-copy-document"></i> 复制到
-			</li>
-			<li
-				class="right-menu-item"
-				@click="handleMoveFileBtnClick(selectedFile)"
-				v-if="moveBtnShow"
-			>
-				<i class="el-icon-s-promotion"></i> 移动
-			</li>
-			<li
-				class="right-menu-item"
 				@click="handleRenameFileBtnClick(selectedFile)"
 				v-if="renameBtnShow"
 			>
@@ -100,20 +86,6 @@
 						<i class="el-icon-files"></i> 解压到目标文件夹
 					</li>
 				</ul>
-			</li>
-			<!-- <li
-				class="right-menu-item"
-				@click="handleClickFolderEdit"
-				v-if="folderEditBtnShow"
-			>
-				<i class="el-icon-edit"></i> 编辑文件夹
-			</li> -->
-			<li
-				class="right-menu-item"
-				@click="handleClickFileEdit(selectedFile)"
-				v-if="onlineEditBtnShow"
-			>
-				<i class="el-icon-edit"></i> 在线编辑
 			</li>
 			<li
 				class="right-menu-item"

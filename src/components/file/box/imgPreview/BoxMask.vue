@@ -3,57 +3,7 @@
 		<div class="img-preview-wrapper" v-show="visible">
 			<!-- 顶部信息栏 & 工具栏 -->
 			<div class="tip-wrapper" v-if="visible">
-				<i
-					class="fold-icon"
-					:class="
-						isShowMinImgList
-							? 'no-fold el-icon-d-arrow-left'
-							: 'fold el-icon-d-arrow-right'
-					"
-					:title="isShowMinImgList ? '折叠缩略图' : '展开缩略图'"
-					@click="isShowMinImgList = !isShowMinImgList"
-				></i>
-				<div class="name" :title="activeImageName">
-					{{ activeImageName }}
-				</div>
-				<div class="opera-btn-group">
-					<el-input-number
-						v-model="inputActiveIndex"
-						:min="1"
-						:max="imgList.length"
-						size="mini"
-						@change="handleChangeInputIndex"
-					></el-input-number>
-					<span class="split-line">/</span>{{ imgList.length }}
-				</div>
 				<div class="tool-wrapper">
-					<i
-						class="item el-icon-refresh-right"
-						title="向右旋转"
-						@click="handleRotateImg"
-					></i>
-					<a
-						class="item download-link"
-						target="_blank"
-						:href="activeDownloadLink"
-						:download="activeImageName"
-					>
-						<i class="el-icon-download" title="保存到本地"></i>
-					</a>
-					<el-tooltip effect="dark" placement="bottom">
-						<div slot="content" style="line-height: 1.5">
-							1. 点击图片以外的区域可退出预览<br />
-							2. 按 Escape 键可退出预览<br />
-							3. 按左、右方向键可切换为上一张、下一张图片<br />
-							4. 鼠标滚轮可放大、缩小图片<br />
-							5. 点击左上角
-							<i class="el-icon-d-arrow-left"></i> 图标可折叠、展开缩略图<br />
-						</div>
-						<div class="item text-wrapper">
-							<span class="text">操作提示</span>
-							<i class="el-icon-s-opportunity"></i>
-						</div>
-					</el-tooltip>
 					<i
 						class="item close-icon el-icon-close"
 						title="关闭预览"
@@ -95,30 +45,6 @@
 					:src="item.fileUrl"
 					v-show="index === activeIndex"
 				/>
-				<!-- 左右切换图标 -->
-				<i
-					class="pre-icon el-icon-arrow-left"
-					title="上一张"
-					v-show="activeIndex > 0"
-					@click.stop="handleChangeActiveImg(activeIndex - 1)"
-				></i>
-				<i
-					class="next-icon el-icon-arrow-right"
-					title="下一张"
-					v-show="activeIndex < imgList.length - 1"
-					@click.stop="handleChangeActiveImg(activeIndex + 1)"
-				></i>
-				<!-- 底部显示放大缩小比例 -->
-				<div class="zoom-bar">
-					<el-slider
-						v-model="imgZoom"
-						:min="imgZoomMin"
-						:max="imgZoomMax"
-						:format-tooltip="formatZoomSize"
-						@input="handleZoomImg"
-					></el-slider>
-					<div class="zoom-count">{{ imgZoom }}%</div>
-				</div>
 			</div>
 		</div>
 	</transition>
@@ -204,14 +130,6 @@ export default {
 	},
 	methods: {
 		/**
-		 * 顶部栏输入框绑定值被改变时触发
-		 * @param {number} currentValue 当前值
-		 */
-		handleChangeInputIndex(currentValue) {
-			this.activeIndex = currentValue - 1
-			this.handleChangeActiveImg(currentValue - 1)
-		},
-		/**
 		 * DOM 绑定 Esc 键、左方向键、右方向键的键盘按下事件
 		 * @param {event} event 事件
 		 */
@@ -274,23 +192,6 @@ export default {
 			this.callback('cancel')
 		},
 		/**
-		 * 格式化 tooltip message - 显示图片缩放比例
-		 * @param {number} value 缩放数字
-		 * @returns {string}  图片缩放比例
-		 */
-		formatZoomSize(value) {
-			return value + '%'
-		},
-		/**
-		 * 数据改变时触发（使用鼠标拖曳时，活动过程实时触发）
-		 * @param {number} value 缩放数字
-		 */
-		handleZoomImg(value) {
-			if (this.$refs.imgLarge) {
-				this.$refs.imgLarge[this.activeIndex].style.zoom = value + '%' //  实时设置图片缩放比例
-			}
-		},
-		/**
 		 * 鼠标滚动事件
 		 * @description 缩放图片
 		 */
@@ -303,15 +204,6 @@ export default {
 				this.$refs.imgLarge[this.activeIndex].style.zoom = zoom + '%'
 			}
 			return false
-		},
-		/**
-		 * 旋转图片
-		 */
-		handleRotateImg() {
-			this.rotate += 90
-			this.$refs.imgLarge[
-				this.activeIndex
-			].style.transform = `rotate(${this.rotate}deg)`
 		},
 		/**
 		 * 改变当前查看的图片索引
@@ -392,56 +284,6 @@ export default {
     justify-content: space-between;
     align-items: center;
 
-    .fold-icon {
-      margin-right: 16px;
-      font-size: 24px;
-      cursor: pointer;
-      &:hover {
-        opacity: 0.6;
-      }
-      &.no-fold {
-        width: 120px;
-      }
-      &.fold {
-        width: 64px;
-      }
-    }
-
-    .name {
-      flex: 1;
-      padding-right: 16px;
-      text-align: left;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .opera-btn-group {
-      width: 100px;
-      display: flex;
-
-      >>> .el-input-number {
-        width: 40px;
-
-        .el-input-number__decrease, .el-input-number__increase {
-          display: none;
-        }
-
-        .el-input__inner {
-          margin-top: 14px;
-          background: rgba(0, 0, 0, 0.5);
-          height: 20px;
-          line-height: 20px;
-          padding: 0;
-          font-size: 16px;
-          color: #fff;
-        }
-      }
-
-      .split-line {
-        margin: 0 8px;
-      }
-    }
 
     .tool-wrapper {
       flex: 1;

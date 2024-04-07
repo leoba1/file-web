@@ -42,13 +42,13 @@
 						<i class="el-icon-document"></i>
 						<span slot="title">文档</span>
 					</el-menu-item>
-					<el-menu-item
-						index="3"
-						:route="{ name: 'File', query: { fileType: 3 } }"
-					>
-						<i class="el-icon-video-camera"></i>
-						<span slot="title">视频</span>
-					</el-menu-item>
+<!--					<el-menu-item-->
+<!--						index="3"-->
+<!--						:route="{ name: 'File', query: { fileType: 3 } }"-->
+<!--					>-->
+<!--						<i class="el-icon-video-camera"></i>-->
+<!--						<span slot="title">视频</span>-->
+<!--					</el-menu-item>-->
 					<el-menu-item
 						index="4"
 						:route="{ name: 'File', query: { fileType: 4 } }"
@@ -140,13 +140,13 @@
 						<i class="el-icon-document"></i>
 						<span slot="title">文档</span>
 					</el-menu-item>
-					<el-menu-item
-						index="3"
-						:route="{ name: 'File', query: { fileType: 3 } }"
-					>
-						<i class="el-icon-video-camera"></i>
-						<span slot="title">视频</span>
-					</el-menu-item>
+<!--					<el-menu-item-->
+<!--						index="3"-->
+<!--						:route="{ name: 'File', query: { fileType: 3 } }"-->
+<!--					>-->
+<!--						<i class="el-icon-video-camera"></i>-->
+<!--						<span slot="title">视频</span>-->
+<!--					</el-menu-item>-->
 					<el-menu-item
 						index="4"
 						:route="{ name: 'File', query: { fileType: 4 } }"
