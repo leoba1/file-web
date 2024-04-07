@@ -151,15 +151,6 @@
 				<li class="right-menu-item" @click="handleClickAddFolderBtn">
 					<i class="el-icon-folder-add"></i> 新建文件夹
 				</li>
-				<li class="right-menu-item" @click="handleCreateFile('docx')">
-					<img :src="wordImg" />新建 Word 文档
-				</li>
-				<li class="right-menu-item" @click="handleCreateFile('xlsx')">
-					<img :src="excelImg" />新建 Excel 工作表
-				</li>
-				<li class="right-menu-item" @click="handleCreateFile('pptx')">
-					<img :src="pptImg" />新建 PPT 演示文稿
-				</li>
 				<el-divider />
 				<li class="right-menu-item" @click="handleUploadFileBtnClick(1)">
 					<i class="el-icon-upload2"></i> 上传文件

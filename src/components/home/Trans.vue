@@ -24,12 +24,12 @@
           </el-form-item>
         </div>
       </el-form>
-      <div v-if="fileInfo" class="file-info" @click="handleClickFileInfo">
-        <div class="file-info-details">
-          <p class="file-info-item">文件名: {{ fileInfo.fileName }}</p>
-          <p class="file-info-item">上传时间: {{ fileInfo.time }}</p>
-        </div>
-      </div>
+<!--      <div v-if="fileInfo" class="file-info" @click="handleClickFileInfo">-->
+<!--        <div class="file-info-details">-->
+<!--          <p class="file-info-item">文件名: {{ fileInfo.fileName }}</p>-->
+<!--          <p class="file-info-item">上传时间: {{ fileInfo.time }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -37,11 +37,13 @@
 <script>
 import axios from 'axios';
 export default {
+
   data() {
     return {
       formData: {
         code: '',
       },
+
       fileInfo: null,
       backCode: null,
       formRules: {
@@ -81,6 +83,7 @@ export default {
       this.backCode = res.data
       this.msg()
     },
+
     async submitForm() {
       await this.$refs.formData.validate();
       try {
@@ -88,6 +91,25 @@ export default {
         this.fileInfo = response.data.data;
         if(response.data.code !== '0'){
           this.$message.error("文件不存在!")
+        } else {
+          this.formData.code = null
+          const uploadTime = new Date(this.fileInfo.time);
+          const formattedTime = uploadTime.toLocaleString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+          this.$alert(`文件名: ${this.fileInfo.fileName}\n上传时间: ${formattedTime}`, '获取文件', {
+            confirmButtonText: '下载',
+            callback: action => {
+              if (action === 'confirm') {
+                this.handleClickFileInfo()
+              }
+            },
+          });
         }
       } catch (error) {
         this.$message.error("发生错误")
@@ -100,6 +122,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 .centered-container {
