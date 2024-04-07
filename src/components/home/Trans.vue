@@ -6,6 +6,7 @@
             class="upload-demo"
             drag
             action="http://localhost:9090/temp/upload"
+            :on-success="uploadFiles"
             multiple>
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -42,6 +43,7 @@ export default {
         code: '',
       },
       fileInfo: null,
+      backCode: null,
       formRules: {
         code: [
           { required: true, message: '请输入取件码', trigger: 'blur' },
@@ -51,6 +53,34 @@ export default {
     };
   },
   methods: {
+    async copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        this.$message({
+          message: '复制成功',
+          type: 'success'
+        });
+      } catch (err) {
+        console.error('无法复制文本: ', err);
+        this.$message.error('复制失败');
+      }
+    },
+    msg() {
+      this.$alert(this.backCode, '请记下取件码', {
+        confirmButtonText: '复制',
+        callback: action => {
+          if (action === 'confirm') {
+            this.copyToClipboard(this.backCode);
+          }
+        },
+      });
+    },
+    uploadFiles(res){
+      console.log(res.data)
+      console.log(res)
+      this.backCode = res.data
+      this.msg()
+    },
     async submitForm() {
       await this.$refs.formData.validate();
       try {
