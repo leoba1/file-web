@@ -92,7 +92,6 @@ export default {
         if(response.data.code !== '0'){
           this.$message.error("文件不存在!")
         } else {
-          this.formData.code = null
           const uploadTime = new Date(this.fileInfo.time);
           const formattedTime = uploadTime.toLocaleString('zh-CN', {
             year: 'numeric',
@@ -102,11 +101,12 @@ export default {
             minute: '2-digit',
             second: '2-digit'
           });
-          this.$alert(`文件名: ${this.fileInfo.fileName}\n上传时间: ${formattedTime}`, '获取文件', {
+          this.$alert(`文件名: ${this.fileInfo.fileName}上传时间: ${formattedTime}`, '获取文件', {
             confirmButtonText: '下载',
             callback: action => {
               if (action === 'confirm') {
                 this.handleClickFileInfo()
+                this.formData.code = null
               }
             },
           });
