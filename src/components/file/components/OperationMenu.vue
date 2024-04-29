@@ -105,90 +105,90 @@
 <!--		</el-input>-->
 
 		<!-- 批量操作 -->
-		<i
-			class="batch-icon el-icon-finished"
-			:class="isBatchOperation ? 'active' : ''"
-			:title="isBatchOperation ? '取消批量操作' : '批量操作'"
-			v-if="fileModel === 1 && fileType !== 8"
-			@click="handleBatchOperationChange()"
-		></i>
+<!--		<i-->
+<!--			class="batch-icon el-icon-finished"-->
+<!--			:class="isBatchOperation ? 'active' : ''"-->
+<!--			:title="isBatchOperation ? '取消批量操作' : '批量操作'"-->
+<!--			v-if="fileModel === 1 && fileType !== 8"-->
+<!--			@click="handleBatchOperationChange()"-->
+<!--		></i>-->
 		<i
 			class="refresh-icon el-icon-refresh"
 			title="刷新文件列表"
 			@click="$emit('getTableDataByType')"
 		></i>
 		<el-divider direction="vertical"></el-divider>
-		<template v-if="screenWidth > 768">
-			<!-- 文件展示模式 -->
-			<i
-				class="model-icon iconfont icon-liebiao1"
-				:class="{ active: fileGroupLable === 0 }"
-				title="列表模式"
-				@click="handleFileDisplayModelChange(0)"
-			></i>
-			<i
-				class="model-icon el-icon-s-grid"
-				:class="{ active: fileGroupLable === 1 }"
-				title="网格模式"
-				@click="handleFileDisplayModelChange(1)"
-			></i>
-			<i
-				class="model-icon el-icon-date"
-				:class="{ active: fileGroupLable === 2 }"
-				title="时间线模式"
-				v-if="fileType === 1"
-				@click="handleFileDisplayModelChange(2)"
-			></i>
-			<el-divider direction="vertical"></el-divider>
-		</template>
+<!--		<template v-if="screenWidth > 768">-->
+<!--			&lt;!&ndash; 文件展示模式 &ndash;&gt;-->
+<!--			<i-->
+<!--				class="model-icon iconfont icon-liebiao1"-->
+<!--				:class="{ active: fileGroupLable === 0 }"-->
+<!--				title="列表模式"-->
+<!--				@click="handleFileDisplayModelChange(0)"-->
+<!--			></i>-->
+<!--			<i-->
+<!--				class="model-icon el-icon-s-grid"-->
+<!--				:class="{ active: fileGroupLable === 1 }"-->
+<!--				title="网格模式"-->
+<!--				@click="handleFileDisplayModelChange(1)"-->
+<!--			></i>-->
+<!--			<i-->
+<!--				class="model-icon el-icon-date"-->
+<!--				:class="{ active: fileGroupLable === 2 }"-->
+<!--				title="时间线模式"-->
+<!--				v-if="fileType === 1"-->
+<!--				@click="handleFileDisplayModelChange(2)"-->
+<!--			></i>-->
+<!--			<el-divider direction="vertical"></el-divider>-->
+<!--		</template>-->
 
 		<!-- 操作栏收纳 -->
-		<el-popover
-			v-model="operatePopoverVisible"
-			placement="bottom"
-			:trigger="screenWidth <= 768 ? 'manual' : 'hover'"
-		>
-			<i
-				slot="reference"
-				class="setting-icon el-icon-setting"
-				@click="operatePopoverVisible = !operatePopoverVisible"
-			></i>
-			<!-- 选择表格列 -->
-			<SelectColumn></SelectColumn>
-			<!-- 文件展示模式 -->
-			<div class="change-file-model" v-if="screenWidth <= 768">
-				<div class="title">查看模式</div>
-				<el-radio-group
-					v-model="fileGroupLable"
-					size="mini"
-					@change="handleFileDisplayModelChange"
-				>
-					<el-radio-button :label="0">
-						<i class="iconfont icon-liebiao1"></i> 列表
-					</el-radio-button>
-					<el-radio-button :label="1">
-						<i class="el-icon-s-grid"></i> 网格
-					</el-radio-button>
-					<el-radio-button :label="2" v-if="fileType === 1">
-						<i class="el-icon-date"></i> 时间线
-					</el-radio-button>
-				</el-radio-group>
-			</div>
-			<template v-if="fileGroupLable === 1 || fileGroupLable === 2">
-				<el-divider class="split-line"></el-divider>
-				<!-- 图标大小调整 -->
-				<div class="change-grid-size">
-					<div class="title">调整图标大小</div>
-					<el-slider
-						v-model="gridSize"
-						:min="20"
-						:max="150"
-						:step="10"
-						:format-tooltip="formatTooltip"
-					></el-slider>
-				</div>
-			</template>
-		</el-popover>
+<!--		<el-popover-->
+<!--			v-model="operatePopoverVisible"-->
+<!--			placement="bottom"-->
+<!--			:trigger="screenWidth <= 768 ? 'manual' : 'hover'"-->
+<!--		>-->
+<!--			<i-->
+<!--				slot="reference"-->
+<!--				class="setting-icon el-icon-setting"-->
+<!--				@click="operatePopoverVisible = !operatePopoverVisible"-->
+<!--			></i>-->
+<!--			&lt;!&ndash; 选择表格列 &ndash;&gt;-->
+<!--			<SelectColumn></SelectColumn>-->
+<!--			&lt;!&ndash; 文件展示模式 &ndash;&gt;-->
+<!--			<div class="change-file-model" v-if="screenWidth <= 768">-->
+<!--				<div class="title">查看模式</div>-->
+<!--				<el-radio-group-->
+<!--					v-model="fileGroupLable"-->
+<!--					size="mini"-->
+<!--					@change="handleFileDisplayModelChange"-->
+<!--				>-->
+<!--					<el-radio-button :label="0">-->
+<!--						<i class="iconfont icon-liebiao1"></i> 列表-->
+<!--					</el-radio-button>-->
+<!--					<el-radio-button :label="1">-->
+<!--						<i class="el-icon-s-grid"></i> 网格-->
+<!--					</el-radio-button>-->
+<!--					<el-radio-button :label="2" v-if="fileType === 1">-->
+<!--						<i class="el-icon-date"></i> 时间线-->
+<!--					</el-radio-button>-->
+<!--				</el-radio-group>-->
+<!--			</div>-->
+<!--			<template v-if="fileGroupLable === 1 || fileGroupLable === 2">-->
+<!--				<el-divider class="split-line"></el-divider>-->
+<!--				&lt;!&ndash; 图标大小调整 &ndash;&gt;-->
+<!--				<div class="change-grid-size">-->
+<!--					<div class="title">调整图标大小</div>-->
+<!--					<el-slider-->
+<!--						v-model="gridSize"-->
+<!--						:min="20"-->
+<!--						:max="150"-->
+<!--						:step="10"-->
+<!--						:format-tooltip="formatTooltip"-->
+<!--					></el-slider>-->
+<!--				</div>-->
+<!--			</template>-->
+<!--		</el-popover>-->
 
 		<!-- 多选文件下载，页面隐藏 -->
 		<a target="_blank" :href="batchDownloadLink" ref="batchDownloadRef"></a>
@@ -196,7 +196,6 @@
 </template>
 
 <script>
-import SelectColumn from './SelectColumn.vue'
 import { mapState } from 'vuex'
 export default {
 	name: 'OperationMenu',
@@ -213,7 +212,7 @@ export default {
 		}
 	},
 	components: {
-		SelectColumn
+		// SelectColumn
 	},
 	data() {
 		return {

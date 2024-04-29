@@ -9,13 +9,13 @@
 			v-if="selectedFile !== undefined"
 			:style="`top: ${rightMenu.top};right: ${rightMenu.right};bottom: ${rightMenu.bottom};left: ${rightMenu.left};`"
 		>
-			<li
-				class="right-menu-item"
-				@click="$file.handleFileNameClick(selectedFile, 0, [selectedFile])"
-				v-if="seeBtnShow"
-			>
-				<i class="el-icon-view"></i> 查看
-			</li>
+<!--			<li-->
+<!--				class="right-menu-item"-->
+<!--				@click="$file.handleFileNameClick(selectedFile, 0, [selectedFile])"-->
+<!--				v-if="seeBtnShow"-->
+<!--			>-->
+<!--				<i class="el-icon-view"></i> 查看-->
+<!--			</li>-->
 			<li
 				class="right-menu-item"
 				@click="handleDeleteFileBtnClick(selectedFile)"
@@ -58,13 +58,13 @@
 					<i class="el-icon-download"></i> 下载
 				</a>
 			</li>
-      <li
-          v-if="unzipBtnShow"
-          class="unzip-item"
-          @click="handleUnzipFileBtnClick(selectedFile, 0)"
-      >
-        <i class="el-icon-files"></i> 解压到当前文件夹
-      </li>
+<!--      <li-->
+<!--          v-if="unzipBtnShow"-->
+<!--          class="unzip-item"-->
+<!--          @click="handleUnzipFileBtnClick(selectedFile, 0)"-->
+<!--      >-->
+<!--        <i class="el-icon-files"></i> 解压到当前文件夹-->
+<!--      </li>-->
 			<li
 				class="right-menu-item"
 				@click="
